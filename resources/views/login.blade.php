@@ -64,24 +64,26 @@
                     <p class="text-center small">Enter your email & password to login</p>
                   </div>
                   @include('layouts._message')
-                  <form class="row g-3 needs-validation" novalidate>
-
+                  <form class="row g-3 needs-validation" action="" method="POST">
+                    @csrf
                     <div class="col-12">
                       <label for="email" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <input type="email" name="email" class="form-control" id="email" required>
                       </div>
                     </div>
+                    <span style="color: red">{{$errors->first('email')}}</span>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                     </div>
+                    <span style="color: red">{{$errors->first('password')}}</span>
 
                     <div class="col-12">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                        <input class="form-check-input" type="checkbox" name="remember" value="" id="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
                       </div>
                     </div>
                     <div class="col-12">

@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\backend\EmployeesController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +25,16 @@ Route::get('forgot-password', [AuthController::class, 'forgot_password']);
 Route::get('register', [AuthController::class, 'register']);
 Route::post('register', [AuthController::class, 'register_post']);
 Route::post('checkemail', [AuthController::class, 'CheckEmail']);
+
+Route::post('/', [AuthController::class, 'login_post']);
+
+// Admin || HR 
+
+Route::group(['middleware' => 'admin'], function () {
+
+    Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('admin/employees', [EmployeesController::class, 'index']);
+
+});
+
+Route::get('logout', [AuthController::class, 'logout']);
