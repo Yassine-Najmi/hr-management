@@ -12,10 +12,12 @@ use Illuminate\Validation\Rule;
 class EmployeesController extends Controller
 {
     public function index () {
-        return view('backend.employees.list');
+        $users = User::getRecord();
+        return view('backend.employees.list', compact('users'));
     }
 
     public function add (Request $request) {
+        
         return view('backend.employees.add');
     }
 
@@ -48,5 +50,10 @@ class EmployeesController extends Controller
         $user->save();
 
         return redirect('admin/employees')->with('success', "Employee has been added successfully");
+    }
+
+    public function view ($id) {
+        $user = User::find($id);
+        return view('backend.employees.view',compact('user'));
     }
 }

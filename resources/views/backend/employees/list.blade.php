@@ -12,6 +12,34 @@
     </div><!-- End Page Title -->
     @include('layouts._message')
     <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Search Employees</h3>
+            <div class="search-bar">
+                <form class="search-form d-flex align-items-center" method="GET" action="#">
+                    <div class="card-body">
+                        <div class=" row justy-content-start align-items-end">
+                            <div class="form-group col-md-1">
+                                <label for="">ID</label>
+                                <input type="text" placeholder="Search" value="{{Request()->id}}" name="id" class="form-control">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="">First Name</label>
+                                <input type="text" placeholder="Search" value="{{Request()->name}}" name="name" class="form-control">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="">Last Name</label>
+                                <input type="text" placeholder="Search" value="{{Request()->last_name}}" name="last_name" class="form-control">
+                            </div>
+                            <div class="form-group col-md-3 ">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                                <a href="{{url('admin/employees')}}" class="btn btn-success">Reset</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- End Search Bar -->
+        </div>
+          
         <div class="card-body">
             <div class="mt-3">
                 <h5 class="card-title d-inline">Employees List</h5>
@@ -21,53 +49,36 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Position</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Start Date</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse ($users as $user)
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Brandon Jacob</td>
-                        <td>Designer</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
+                        <th scope="row">{{$user->id}}</th>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->last_name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{!empty($user->is_role) ? 'HR' : 'Employee'}}</td>
+                        <td class="text-center">
+                            <a href="{{url('admin/employees/view/' . $user->id)}}" class="btn btn-info">View</a>
+                            <a href="{{url('admin/employees/edit/' . $user->id)}}" class="btn btn-primary">Edit</a>
+                            <a href="{{url('admin/employees/delete/' . $user->id)}}" class="btn btn-danger">Delete</a>
+                        </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Bridie Kessler</td>
-                        <td>Developer</td>
-                        <td>35</td>
-                        <td>2014-12-05</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Ashleigh Langosh</td>
-                        <td>Finance</td>
-                        <td>45</td>
-                        <td>2011-08-12</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Angus Grady</td>
-                        <td>HR</td>
-                        <td>34</td>
-                        <td>2012-06-11</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>Raheem Lehner</td>
-                        <td>Dynamic Division Officer</td>
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                    </tr>
+                    @empty 
+                    <td colspan="100%" class="text-center">No Record Found.</td>
+                    @endforelse
+                    
                 </tbody>
             </table>
             <!-- End Table with stripped rows -->
-
+            {{$users->links()}}
         </div>
     </div>
 @endsection
