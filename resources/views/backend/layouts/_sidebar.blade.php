@@ -18,7 +18,7 @@
       </li><!-- End employees Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url('admin/jobs')}}">
+        <a class="nav-link @if (Request::segment(2) != 'jobs') collapsed @endif" href="{{url('admin/jobs')}}">
           <i class="bi bi-briefcase"></i>
           <span>Jobs</span>
         </a>

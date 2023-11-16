@@ -56,4 +56,44 @@ class EmployeesController extends Controller
         $user = User::find($id);
         return view('backend.employees.view',compact('user'));
     }
+
+    public function edit ($id) {
+        $user = User::find($id);
+        return view('backend.employees.edit',compact('user'));
+    }
+
+    public function edit_post(Request $request, $id) {
+        $user = User::find($id);
+        $request->validate([
+            'name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'phone_number' => 'required',
+            'hire_date' => 'required',
+            'job_id' => 'required|notIn:0',
+            'salary' => 'required|numeric',
+            'commission_pct' => 'required|numeric',
+            'manager_id' => 'required|notIn:0',
+            'department_id' => 'required|notIn:0',
+        ]);
+        $user->name = trim($request->name);
+        $user->last_name = trim($request->last_name);
+        $user->email = trim($request->email);
+        $user->phone_number = trim($request->phone_number);
+        $user->hire_date = trim($request->hire_date);
+        $user->job_id = trim($request->job_id);
+        $user->salary = trim($request->salary);
+        $user->commission_pct = trim($request->commission_pct);
+        $user->manager_id = trim($request->manager_id);
+        $user->department_id = trim($request->department_id);
+        $user->is_role = 0; // 0 - Employees
+        $user->save();
+        return redirect('admin/employees')->with('success', "Employee has been updated successfully");
+    }
+
+    public function delete ($id) {
+        $user = User::find($id);
+        $user->delete();
+        return redirect('admin/employees')->with('success', "Employee has been deleted successfully");   
+    }
 }
