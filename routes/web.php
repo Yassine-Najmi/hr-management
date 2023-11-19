@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\EmployeesController;
-use App\Http\Controllers\JobsController;
+use App\Http\Controllers\backend\JobsController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -52,7 +52,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/jobs/edit/{id}', [JobsController::class, 'edit']);
     Route::post('admin/jobs/edit/{id}', [JobsController::class, 'edit_post']);
     Route::get('admin/jobs/delete/{id}', [JobsController::class, 'delete']);
-
+    Route::get('admin/jobs/export', [JobsController::class, 'export']);
 
 });
 

@@ -55,9 +55,9 @@
                         <div class="col-12">
                             <select class="form-select" name="job_id" id="job_id">
                                 <option selected value="0">Select Job Title</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($jobs as $job)             
+                                <option value="{{{ $job->id }}}">{{$job->job_title}}</option>
+                                @endforeach
                             </select>
                             <span class="text-danger">{{ $errors->first('job_id') }}</span>
                         </div>

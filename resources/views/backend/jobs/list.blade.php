@@ -13,7 +13,17 @@
     @include('layouts._message')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Search Jobs</h3>
+            <div class="d-flex mx-3 justify-content-between align-items-center">
+
+                <h3 class="card-title ">Search Jobs</h3>
+                <div class="excel-bar">
+                    <form class="" action="{{url('admin/jobs/export')}}" method="get">
+                        <input type="hidden" name="start_date" value="{{Request()->start_date}}">
+                        <input type="hidden" name="end_date" value="{{Request()->end_date}}">
+                        <a class="btn btn-primary" href="{{url('admin/jobs/export?start_date='.Request()->start_date.'&end_date='.Request()->end_date)}}')}}">Export CSV</a>
+                    </form>
+                </div>
+            </div>
             <div class="search-bar">
                 <form class="search-form d-flex align-items-center" method="GET" action="#">
                     <div class="card-body">
@@ -26,6 +36,16 @@
                                 <label for="">Job Title</label>
                                 <input type="text" placeholder="Search" value="{{Request()->job_title}}" name="job_title" class="form-control">
                             </div>
+                            <div class="form-group col-md-2">
+                                <label for="">From Date</label>
+                                <input type="date" value="{{Request()->start_date}}" name="start_date" class="form-control">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="">To Date</label>
+                                <input type="date" value="{{Request()->end_date}}" name="end_date" class="form-control">
+                            </div>
+
                             <div class="form-group col-md-3 ">
                                 <button class="btn btn-primary" type="submit">Search</button>
                                 <a href="{{url('admin/jobs')}}" class="btn btn-success">Reset</a>
@@ -64,10 +84,10 @@
                         <td class="text-center">
                             <a href="{{url('admin/jobs/view/' . $job->id)}}" class="btn btn-info">View</a>
                             <a href="{{url('admin/jobs/edit/' . $job->id)}}" class="btn btn-primary">Edit</a>
-                            <a href="{{url('admin/jobs/delete/') . $job->id}}" onclick="return confirm('Are you sure you want to delete the job {{$job->job_title}}')" class="btn btn-danger">Delete</a>
+                            <a href="{{url('admin/jobs/delete/' . $job->id)}}" onclick="return confirm('Are you sure you want to delete the job {{$job->job_title}}')" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
-                    @empty 
+                    @empty  
                     <td colspan="100%" class="text-center">No Record Found.</td>
                     @endforelse
                     

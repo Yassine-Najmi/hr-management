@@ -65,7 +65,7 @@
   
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">Job ID</div>
-                      <div class="col-lg-9 col-md-8">{{$user->job_id}}</div>
+                      <div class="col-lg-9 col-md-8">{{!empty($user->job->job_title) ? $user->job->job_title : ''}}</div>
                     </div>
   
                     <div class="row">

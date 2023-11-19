@@ -24,6 +24,11 @@ class Jobs extends Model
             $jobs = $jobs->where('id', '=', $id);
         } elseif (!empty($job_title)){
             $jobs = $jobs->where('job_title', 'like', '%' .$job_title. '%');
+        } elseif (!empty(Request()->get('start_date')) && !empty(Request()->get('end_date'))) {
+            $startDate = Request()->get('start_date');
+            $endDate = Request()->get('end_date');
+        
+            $jobs = $jobs->whereBetween('jobs.created_at', [$startDate, $endDate]);
         }
         // Search end
         
@@ -31,6 +36,11 @@ class Jobs extends Model
                 ->orderBy('id', 'DESC')
                 ->paginate(20);
 
+        }
+
+        static public function getJob() {
+            $jobs = Jobs::select('jobs.*');
+            return $jobs->get();
         }
     }
 

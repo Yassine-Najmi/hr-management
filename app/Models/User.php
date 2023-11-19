@@ -3,11 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
+use App\Models\Jobs;
+use Illuminate\Http\Request;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\Request;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -44,7 +46,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    static public function getRecord() {
+    static public function getRecord()
+    {
         $users = self::select('users.*');
 
         // Search start 
@@ -52,18 +55,23 @@ class User extends Authenticatable
         $name = Request()->get('name');
         $last_name = Request()->get('last_name');
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $users = $users->where('id', '=', $id);
-        } elseif (!empty($name)){
-            $users = $users->where('name', 'like', '%' .$name. '%');
-        } elseif (!empty($last_name)){
-            $users = $users->where('last_name', 'like', '%' .$last_name. '%');
+        } elseif (!empty($name)) {
+            $users = $users->where('name', 'like', '%' . $name . '%');
+        } elseif (!empty($last_name)) {
+            $users = $users->where('last_name', 'like', '%' . $last_name . '%');
         }
-
+        
         // Search end
 
         return $users
-        -> orderBy('id', 'DESC')
-        ->paginate(20);
+            ->orderBy('id', 'DESC')
+            ->paginate(20);
+    }
+
+    public function job()
+    {
+        return $this->hasOne(Jobs::class, 'id', 'job_id');
     }
 }
