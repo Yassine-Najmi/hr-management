@@ -17,10 +17,10 @@
 
                 <h3 class="card-title ">Search Jobs</h3>
                 <div class="excel-bar">
-                    <form class="" action="{{url('admin/jobs/export')}}" method="get">
+                    <form class="" action="{{url('admin/jobs/export')}}" method="GET">
                         <input type="hidden" name="start_date" value="{{Request()->start_date}}">
                         <input type="hidden" name="end_date" value="{{Request()->end_date}}">
-                        <a class="btn btn-primary" href="{{url('admin/jobs/export?start_date='.Request()->start_date.'&end_date='.Request()->end_date)}}')}}">Export CSV</a>
+                        <a class="btn btn-primary" href="{{url('admin/jobs/export?start_date='.Request::get('start_date').'&end_date='.Request::get('end_date'))}}')}}">Export CSV</a>
                     </form>
                 </div>
             </div>

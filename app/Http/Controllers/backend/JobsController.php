@@ -10,8 +10,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class JobsController extends Controller
 {
-    public function index() {
-        $jobs = Jobs::getRecord();
+    public function index(Request $request) {
+        $jobs = Jobs::getRecord($request);
         return view('backend.jobs.list', compact('jobs'));
     }
 
@@ -64,7 +64,6 @@ class JobsController extends Controller
     }
 
     public function export() {
-        $excel = new Excel();
-        return $excel->download(new JobsExport, 'jobs.xlsx');
+        return Excel::download(new JobsExport, 'jobs.xlsx');
     }
 }
