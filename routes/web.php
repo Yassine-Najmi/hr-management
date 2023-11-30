@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\EmployeesController;
 use App\Http\Controllers\backend\JobsController;
+use App\Livewire\Auth\Login;
+use App\Livewire\Auth\Register;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -21,13 +23,13 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //     return view('welcome');
 // });
 
-Route::get('/', [AuthController::class, 'index']);
+Route::get('/', [Login::class, 'index']);
 Route::get('forgot-password', [AuthController::class, 'forgot_password']);
-Route::get('register', [AuthController::class, 'register']);
-Route::post('register', [AuthController::class, 'register_post']);
+Route::get('register', [Register::class, 'register']);
+Route::post('register', [Register::class, 'register_post']);
 Route::post('checkemail', [AuthController::class, 'CheckEmail']);
 
-Route::post('/', [AuthController::class, 'login_post']);
+Route::post('/', [Login::class, 'login_post']);
 
 // Admin || HR 
 
@@ -53,7 +55,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/jobs/edit/{id}', [JobsController::class, 'edit_post']);
     Route::get('admin/jobs/delete/{id}', [JobsController::class, 'delete']);
     Route::get('admin/jobs/export', [JobsController::class, 'export']);
-
 });
 
 Route::get('logout', [AuthController::class, 'logout']);

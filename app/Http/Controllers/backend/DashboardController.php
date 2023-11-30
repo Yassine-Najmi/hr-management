@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function dashboard (Request $request) {
+    public function dashboard(Request $request)
+    {
         return view('backend.dashboard.list');
     }
-
 }
