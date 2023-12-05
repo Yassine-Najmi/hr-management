@@ -46,7 +46,8 @@
                             <button class="btn btn-primary w-100" type="submit">Login</button>
                         </div>
                         <div class="col-12">
-                            <p class="small mb-2">Don't have account? <a href="{{ url('register') }}">Create an
+                            <p class="small mb-2">Don't have account? <a wire:navigate
+                                    href="{{ url('register') }}">Create an
                                     account</a></p>
                             <a class="small" href="{{ url('forgot-password') }}">I forgot my
                                 password</a>

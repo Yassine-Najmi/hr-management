@@ -9,6 +9,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    @livewireStyles()
+
     <!-- Favicons -->
     <link href="{{ url('assets/img/favicon.png') }}" rel="icon">
     <link href="{{ url('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -36,13 +38,7 @@
 
 <body>
 
-    @include('backend.layouts._header')
-    @include('backend.layouts._sidebar')
-    <main id="main" class="min-vh-100 main">
-        @yield('content')
-    </main>
-
-    @include('backend.layouts._footer')
+    @livewire('backend.dashboard')
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
@@ -59,6 +55,8 @@
 
     <!-- Template Main JS File -->
     <script src="{{ url('assets/js/main.js') }}"></script>
+
+    @livewireScripts
 
 </body>
 

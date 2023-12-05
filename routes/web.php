@@ -2,11 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\backend\DashboardController;
-use App\Http\Controllers\backend\EmployeesController;
 use App\Http\Controllers\backend\JobsController;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\Backend\Dashboard as BackendDashboard;
+use App\Livewire\Backend\Employees\EmployeeCreate;
+use App\Livewire\Backend\Employees\EmployeeEdit;
+use App\Livewire\Backend\Employees\Employees;
+use App\Livewire\Backend\Employees\EmployeesList;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -35,16 +38,16 @@ Route::post('/', [Login::class, 'login_post']);
 
 Route::group(['middleware' => 'admin'], function () {
 
-    Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('admin/dashboard', [BackendDashboard::class, 'dashboard']);
 
     // Employees
-    Route::get('admin/employees', [EmployeesController::class, 'index']);
-    Route::get('admin/employees/add', [EmployeesController::class, 'add']);
-    Route::post('admin/employees/add', [EmployeesController::class, 'add_post']);
-    Route::get('admin/employees/view/{id}', [EmployeesController::class, 'view']);
-    Route::get('admin/employees/edit/{id}', [EmployeesController::class, 'edit']);
-    Route::post('admin/employees/edit/{id}', [EmployeesController::class, 'edit_post']);
-    Route::get('admin/employees/delete/{id}', [EmployeesController::class, 'delete']);
+    Route::get('admin/employees', [EmployeesList::class, 'index']);
+    Route::get('admin/employees/add', [EmployeeCreate::class, 'add']);
+    Route::post('admin/employees/add', [EmployeeCreate::class, 'add_post']);
+    Route::get('admin/employees/view/{id}', [EmployeesList::class, 'view']);
+    Route::get('admin/employees/edit/{id}', [EmployeeEdit::class, 'edit']);
+    Route::post('admin/employees/edit/{id}', [EmployeeEdit::class, 'edit_post']);
+    Route::get('admin/employees/delete/{id}', [Employees::class, 'delete']);
 
     //Jobs
     Route::get('admin/jobs', [JobsController::class, 'index']);

@@ -62,7 +62,7 @@ class User extends Authenticatable
         } elseif (!empty($last_name)) {
             $users = $users->where('last_name', 'like', '%' . $last_name . '%');
         }
-        
+
         // Search end
 
         return $users
