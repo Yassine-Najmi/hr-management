@@ -29,38 +29,61 @@
 
                 <form action="{{ route('register') }}" method="post">
                     @csrf
-                    <div class="input-group mb-3">
-                        <input type="text" name="name" class="form-control" placeholder="Full name">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
+                    <div class="form-group mb-3">
+                        <div class="input-group ">
+                            <input type="text" name="name" value="{{ old('name') }}" class="form-control"
+                                placeholder="Full name">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
                             </div>
                         </div>
+
+                        @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <input type="email" name="email" value="{{ old('email') }}" class="form-control"
+                                placeholder="Email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
                             </div>
                         </div>
+                        @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
                             </div>
                         </div>
+                        @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="password_confirmation" class="form-control"
-                            placeholder="Retype password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <input type="password" name="password_confirmation" class="form-control"
+                                placeholder="Retype password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
                             </div>
                         </div>
+                        @error('password_confirmation')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-8">
@@ -101,6 +124,28 @@
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
+
+    {{-- <script type="text/javascript">
+        function checkEmail(element) {
+            var email = $(element).val();
+            $.ajax({
+                type: "POST",
+                url: "{{ url('check-email') }}",
+                data: {
+                    email: email
+                    _token: "{{ csrf_token() }}"
+                },
+                dataType: "json",
+                success: function(res) {
+                    if (res.exists) {
+                        $(".duplicate_message").html()
+                    }
+                }
+            })
+
+        }
+    </script> --}}
+
 </body>
 
 </html>
