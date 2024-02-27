@@ -55,13 +55,13 @@ class AuthController extends Controller
     {
 
         $request->validate([
-            'name' => 'required',
+            'first_name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
 
         $user = new User([
-            'name' => trim($request->name),
+            'first_name' => trim($request->first_name),
             'email' => trim($request->email),
             'password' => Hash::make($request->password),
             'remember_token' => Str::random(50),
@@ -76,5 +76,12 @@ class AuthController extends Controller
     public function forgotPassword(): View
     {
         return view('auth.forgot-password');
+    }
+
+    // Logout
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

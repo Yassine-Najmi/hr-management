@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -31,9 +32,24 @@ Route::post("/register", [AuthController::class, "register_action"])->name("regi
 // forgot-password
 Route::get("/forgot-password", [AuthController::class, "forgotPassword"])->name("forgot-password");
 
+// logout
+Route::get("/logout", [AuthController::class, "logout"])->name("logout");
+
+
 // Admin || HR
 Route::group(["middleware" => "admin"], function () {
 
     // Dashboard
     Route::get("admin/dashboard", [DashboardController::class, "dashboard"])->name("dashboard");
+
+    // Employees
+    Route::get("admin/employees", [EmployeesController::class, "employeesList"])->name("employees");
+    Route::get("admin/employees/add", [EmployeesController::class, "add"])->name("employees.add");
+    Route::post("admin/employees/add", [EmployeesController::class, "add_action"])->name("employees.add_action");
+});
+
+
+
+Route::get('/test', function () {
+    return view('backend.layouts.test');
 });

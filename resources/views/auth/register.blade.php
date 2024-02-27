@@ -31,7 +31,7 @@
                     @csrf
                     <div class="form-group mb-3">
                         <div class="input-group ">
-                            <input type="text" name="name" value="{{ old('name') }}" class="form-control"
+                            <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control"
                                 placeholder="Full name">
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
 
-                        @error('name')
+                        @error('first_name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
