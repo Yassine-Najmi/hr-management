@@ -41,72 +41,70 @@
                                     <button class="btn btn-secondary px-4" id="excel">Excel</button>
                                     <button class="btn btn-secondary ml-3 px-4" id="pdf">PDF</button>
                                 </div>
-                                <div class="input-group rounded w-25">
-                                    <input type="search" class="form-control rounded" placeholder="Search"
-                                        aria-label="Search" aria-describedby="search-addon" />
-                                    <span class="input-group-text ml-1 border-0" id="search-addon">
-                                        <i class="fas fa-search"></i>
-                                    </span>
-                                </div>
+                                <form method="get" action="{{ route('employees') }}">
+                                    @csrf
+                                    <div class="input-group rounded ">
+                                        <input type="text" name="search" value="{{ Request::get('search') }}"
+                                            class="form-control rounded" placeholder="Search" aria-label="Search"
+                                            aria-describedby="search-addon" />
+                                        <button type="submit" class="input-group-text ml-1 border-0" id="search-addon">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="example1" class="mb-5 table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Email</th>
+                                            <th>Phone Number</th>
+                                            <th>Hire Date</th>
+                                            <th>Job</th>
+                                            <th>Salary</th>
+                                            <th>Commission Pct</th>
+                                            <th>Manager</th>
+                                            <th>Department</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Yassine</td>
-                                            <td>Marco</td>
-                                            <td>yassine@marco.com</td>
-                                            <td>action</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 5.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td>5</td>
-                                            <td>C</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 5.5
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td>5.5</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 6
-                                            </td>
-                                            <td>Win 98+</td>
-                                            <td>6</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 7</td>
-                                            <td>Win XP SP2+</td>
-                                            <td>7</td>
-                                            <td>A</td>
-                                        </tr>
+
+                                        @foreach ($employees as $employee)
+                                            <tr>
+                                                <td>{{ $employee->id }}</td>
+                                                <td>{{ $employee->first_name }}</td>
+                                                <td>{{ $employee->last_name }}</td>
+                                                <td>{{ $employee->email }}</td>
+                                                <td>{{ $employee->phone_number }}</td>
+                                                <td>{{ $employee->hire_date }}</td>
+                                                <td>{{ $employee->job_id }}</td>
+                                                <td>{{ $employee->salary }}</td>
+                                                <td>{{ $employee->commission_pct }}</td>
+                                                <td>{{ $employee->manager_id }}</td>
+                                                <td>{{ $employee->department_id }}</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <a href="#" class="btn btn-info btn-sm">View</a>
+                                                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
+                                <div class=" d-flex justify-content-center">
+                                    {{ $employees->links() }}
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
+
                     </section>
 
                 </div>
