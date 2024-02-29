@@ -53,6 +53,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'hire_date' => 'date',
     ];
 
 
@@ -84,7 +85,7 @@ class User extends Authenticatable
                 ->where('is_role', 0)
                 ->where(function ($query) use ($search) {
                     $query->where('id', '=', $search)
-                        ->where('first_name', 'like', '%' . $search . '%')
+                        ->orwhere('first_name', 'like', '%' . $search . '%')
                         ->orWhere('last_name', 'like', '%' . $search . '%')
                         ->orWhere('email', 'like', '%' . $search . '%')
                         ->orWhere('phone_number', 'like', '%' . $search . '%')

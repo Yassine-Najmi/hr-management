@@ -46,6 +46,7 @@ Route::group(["middleware" => "admin"], function () {
     Route::get("admin/employees", [EmployeesController::class, "employeesList"])->name("employees");
     Route::get("admin/employees/add", [EmployeesController::class, "add"])->name("employees.add");
     Route::post("admin/employees/add", [EmployeesController::class, "add_action"])->name("employees.add_action");
+    Route::get("admin/employees/view/{user}", [EmployeesController::class, "view"])->name("employees.view");
 });
 
 

@@ -73,7 +73,7 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($employees as $employee)
+                                        @forelse ($employees as $employee)
                                             <tr>
                                                 <td>{{ $employee->id }}</td>
                                                 <td>{{ $employee->first_name }}</td>
@@ -88,13 +88,18 @@
                                                 <td>{{ $employee->department_id }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="#" class="btn btn-info btn-sm">View</a>
+                                                        <a href="{{ route('employees.view', $employee->id) }}"
+                                                            class="btn btn-info btn-sm">View</a>
                                                         <a href="#" class="btn btn-primary btn-sm">Edit</a>
                                                         <a href="#" class="btn btn-danger btn-sm">Delete</a>
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td colspan="12" class="text-center">No records found</td>
+                                            </tr>
+                                        @endforelse
 
                                     </tbody>
                                 </table>

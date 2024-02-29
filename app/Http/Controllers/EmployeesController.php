@@ -58,4 +58,9 @@ class EmployeesController extends Controller
         $user->save();
         return redirect('/admin/employees')->with('success', 'Employee added successfully');
     }
+
+    public function view(User $user)
+    {
+        return view('backend.employees.employeesView', compact('user'));
+    }
 }
